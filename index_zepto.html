@@ -176,11 +176,6 @@
     <script src="js/zepto/touch.js"></script>
     <script>
         $(function(){
-            /*
-            * 1.自动轮播
-            * 2.圆点滚动
-            * 3.手势  上一张  下一张
-            * */
 
             var $banner = $('.jd_banner');
 
@@ -196,38 +191,30 @@
                 $imageBox.animate({'transform':'translateX('+(-index*width)+'px)'},200,'ease',function(){
                     if(index >= 9){
                         index = 1;
-                        /*瞬间定位回去*/
                         $imageBox.css({'transform':'translateX('+(-index*width)+'px)'});
                     }else if(index <= 0){
                         index = 8;
-                        /*瞬间定位回去*/
                         $imageBox.css({'transform':'translateX('+(-index*width)+'px)'});
                     }
-                    /*2.圆点滚动*/
                     $points.removeClass('current').eq(index-1).addClass('current');
 
                     callback && callback();
                 });
             }
 
-            /*1.自动轮播*/
             var index = 1;
             var timer = setInterval(function(){
                 index ++ ;
-                /*动画*/
                 animateFUC();
             },5000);
 
-            /*3.手势  上一张  下一张*/
             $imageBox.on('swipeRight',function(){
                 index --;
                 clearInterval(timer);
-                /*动画*/
                 animateFUC(function(){
                     clearInterval(timer);
                     timer = setInterval(function(){
                         index ++ ;
-                        /*动画*/
                         animateFUC();
                     },5000);
                 });
@@ -235,12 +222,10 @@
             $imageBox.on('swipeLeft',function(){
                 index ++;
                 clearInterval(timer);
-                /*动画*/
                 animateFUC(function(){
                     clearInterval(timer);
                     timer = setInterval(function(){
                         index ++ ;
-                        /*动画*/
                         animateFUC();
                     },5000);
                 });
